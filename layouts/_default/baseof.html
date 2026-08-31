@@ -5,20 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
   <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
-  <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ "/index.xml" | absURL }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ "/index.xml" | relURL }}">
   {{ with .Params.summary }}<meta name="description" content="{{ . }}">{{ end }}
-  <link rel="stylesheet" href="{{ "/css/site.css" | absURL }}">
+  <link rel="stylesheet" href="{{ "/css/site.css" | relURL }}">
   {{ if .IsNode }}<link rel="canonical" href="{{ .Permalink }}">{{ end }}
 </head>
 <body>
   <header>
-    <a href="{{ "/" | absURL }}" class="site-name">{{ .Site.Title }}</a>
+    <a href="{{ "/" | relURL }}" class="site-name">{{ .Site.Title }}</a>
     <nav>
-      <a href="{{ "/" | absURL }}">Home</a>
-      <a href="{{ "/essays/" | absURL }}">Essays</a>
-      <a href="{{ "/notes/" | absURL }}">Notes</a>
-      <a href="{{ "/about/" | absURL }}">About</a>
-      <a href="{{ "/contact/" | absURL }}">Contact</a>
+      <a href="{{ "/" | relURL }}">Home</a>
+      <a href="{{ "/essays/" | relURL }}">Essays</a>
+      <a href="{{ "/notes/" | relURL }}">Notes</a>
+      <a href="{{ "/about/" | relURL }}">About</a>
+      <a href="{{ "/contact/" | relURL }}">Contact</a>
     </nav>
   </header>
 
@@ -27,7 +27,7 @@
   </main>
 
   <footer>
-    <p>&copy; {{ now.Year }} {{ .Site.Title }} &middot; <a href="{{ "/index.xml" | absURL }}">RSS</a></p>
+    <p>&copy; {{ now.Year }} {{ .Site.Title }} &middot; <a href="{{ "/index.xml" | relURL }}">RSS</a></p>
   </footer>
 </body>
 </html>
