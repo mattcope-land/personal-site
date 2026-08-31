@@ -24,3 +24,12 @@ enableRobotsTXT = true
 
 [minify]
   minifyOutput = true
+
+# Where a page's date comes from, in order of precedence:
+#   :default  -- the `date` field in front matter, if present
+#   :filename -- the YYYY-MM-DD prefix on the filename
+# So a note can be a bare .md file with no front matter at all, and an explicit
+# date (with a time) still wins when several notes share a day and order matters.
+# Essays have no date in their filename, so they do need a `date` in front matter.
+[frontmatter]
+  date = [':default', ':filename']
