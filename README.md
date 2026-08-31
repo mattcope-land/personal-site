@@ -1,6 +1,6 @@
 # mattcope.land
 
-A personal website: essays and notes, written in Markdown, rendered by Hugo, hosted on Cloudflare Pages. No database, no CMS, no JavaScript required to read.
+A personal website: essays and notes, written in Markdown, rendered by Hugo, hosted on Cloudflare Workers. No database, no CMS, no JavaScript required to read.
 
 ## Local preview
 
@@ -46,16 +46,40 @@ hugo --minify
 
 Output goes to `public/`. The site is static HTML + CSS + an RSS feed at `/index.xml`.
 
-## Deploy (Cloudflare Pages)
+## Deploy (Cloudflare Workers)
 
-1. Push this repo to GitHub.
-2. In Cloudflare Pages, create a project connected to the GitHub repo.
-3. Build settings:
-   - **Build command:** `hugo --minify`
-   - **Build output directory:** `public`
-   - **Hugo version:** set `HUGO_VERSION` env to `0.165.0` (or current stable)
-4. Push to the default branch to deploy. Cloudflare builds and serves automatically.
-5. Add a custom domain in the Pages project settings when ready.
+This repo deploys as a **Worker with static assets** via Workers Builds — not
+Cloudflare Pages. `wrangler.jsonc` holds the deploy config so it lives in version
+control rather than only in the dashboard.
+
+Build settings (Workers project -> Settings -> Build):
+
+- **Build command:** `hugo --minify`
+- **Deploy command:** `npx wrangler deploy`
+- **Build variable:** `HUGO_VERSION = 0.165.0`
+
+`HUGO_VERSION` is not optional. Cloudflare's build image ships an older Hugo
+(extended_0.147.7 as of this writing), and Hugo renamed config keys in 0.158
+(`languageCode` -> `locale`). Set it as a **build** variable, not a runtime variable.
+
+### Production vs preview
+
+Workers Builds decides this by branch (Settings -> Build -> Branch control):
+
+- The **production branch** runs the *Deploy command* (`npx wrangler deploy`) and
+  updates the live site.
+- Every **other branch** runs the *Non-production branch deploy command*
+  (`npx wrangler versions upload`), which creates a preview version and does
+  **not** promote it to production.
+
+If pushes are landing as previews instead of going live, the production branch
+is set to something other than `main`. Fix it in Branch control.
+
+### Custom domain
+
+`mattcope.land` must be an active zone on Cloudflare (nameservers pointed at
+Cloudflare) before it can be attached to the Worker. Attaching a custom domain
+does not work while DNS is hosted elsewhere.
 
 ## Feed
 
@@ -83,6 +107,8 @@ layouts/          HTML templates (in-repo, no external theme)
 static/css/       Stylesheet (no build step)
 archetypes/       Templates for `hugo new`
 hugo.toml         Site configuration
+wrangler.jsonc    Cloudflare Workers deploy config
+LICENSE           MIT for the code; writing is all rights reserved
 ```
 
 Markdown files are the site. Hugo is a camera. The host is a shelf.
