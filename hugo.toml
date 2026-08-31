@@ -2,6 +2,7 @@ baseURL = 'https://mattcope.land/'
 locale = 'en-us'
 title = 'Matt Copeland'
 timezone = 'America/New_York'
+enableRobotsTXT = true
 
 [params]
   description = 'Writing and notes from Matt Copeland.'
@@ -14,9 +15,9 @@ timezone = 'America/New_York'
   notes = '/notes/:year/:month/:day/:slug/'
   essays = '/essays/:slug/'
 
+# No taxonomies. An empty table overrides Hugo's tags/categories defaults;
+# empty-string values would silently ignore any `tags:` front matter instead.
 [taxonomies]
-  tag = ''
-  category = ''
 
 [minify]
   minifyOutput = true

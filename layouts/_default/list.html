@@ -1,7 +1,7 @@
-{{ define "title" }}{{ .Title }} &middot; {{ .Site.Title }}{{ end }}
+{{ define "title" }}{{ with .Title }}{{ . }} &middot; {{ end }}{{ .Site.Title }}{{ end }}
 {{ define "main" }}
 <section class="stream">
-  <h1>{{ .Title }}</h1>
+  {{ with .Title }}<h1>{{ . }}</h1>{{ end }}
   {{ range .Pages }}
   <article class="stream-item">
     <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "January 2, 2006" }}</time>

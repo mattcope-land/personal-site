@@ -1,27 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>404 &middot; {{ .Site.Title }}</title>
-  <link rel="stylesheet" href="{{ "/css/site.css" | relURL }}">
-</head>
-<body>
-  <header>
-    <a href="{{ "/" | relURL }}" class="site-name">{{ .Site.Title }}</a>
-    <nav>
-      <a href="{{ "/" | relURL }}">Home</a>
-      <a href="{{ "/essays/" | relURL }}">Essays</a>
-      <a href="{{ "/notes/" | relURL }}">Notes</a>
-      <a href="{{ "/about/" | relURL }}">About</a>
-      <a href="{{ "/contact/" | relURL }}">Contact</a>
-    </nav>
-  </header>
-  <main>
-    <p>That page doesn&rsquo;t exist. <a href="{{ "/" | relURL }}">Go home &rarr;</a></p>
-  </main>
-  <footer>
-    <p>&copy; {{ now.Year }} {{ .Site.Title }} &middot; <a href="{{ "/index.xml" | relURL }}">RSS</a></p>
-  </footer>
-</body>
-</html>
+{{ define "title" }}404 &middot; {{ .Site.Title }}{{ end }}
+{{ define "main" }}
+<p>That page doesn&rsquo;t exist. <a href="{{ "/" | relURL }}">Go home &rarr;</a></p>
+{{ end }}

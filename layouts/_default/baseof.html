@@ -4,11 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
-  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  {{/* One description only: page description, else summary, else site default. */}}
+  <meta name="description" content="{{ or .Description .Params.summary .Site.Params.description }}">
+  {{/* Canonical on every page, absolute via baseURL, so preview deployments
+       (*.workers.dev) never compete with the real domain in search results. */}}
+  {{ if ne .Kind "404" }}<link rel="canonical" href="{{ .Permalink }}">{{ end }}
   <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ "/index.xml" | relURL }}">
-  {{ with .Params.summary }}<meta name="description" content="{{ . }}">{{ end }}
   <link rel="stylesheet" href="{{ "/css/site.css" | relURL }}">
-  {{ if .IsNode }}<link rel="canonical" href="{{ .Permalink }}">{{ end }}
 </head>
 <body>
   <header>

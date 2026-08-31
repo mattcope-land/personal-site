@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: {{ "sitemap.xml" | relURL }}
+Sitemap: {{ "sitemap.xml" | absURL }}
