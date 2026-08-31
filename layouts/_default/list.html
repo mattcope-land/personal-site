@@ -1,0 +1,23 @@
+{{ define "title" }}{{ .Title }} &middot; {{ .Site.Title }}{{ end }}
+{{ define "main" }}
+<section class="stream">
+  <h1>{{ .Title }}</h1>
+  {{ range .Pages }}
+  <article class="stream-item">
+    <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "January 2, 2006" }}</time>
+    {{ if .Title }}
+    <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+    {{ with .Params.summary }}
+    <p class="summary">{{ . }}</p>
+    {{ else }}
+    {{ with .Summary }}
+    <p class="summary">{{ . }}</p>
+    {{ end }}
+    {{ end }}
+    {{ else }}
+    <div class="note-body">{{ .Content | plainify | truncate 200 }}</div>
+    {{ end }}
+  </article>
+  {{ end }}
+</section>
+{{ end }}
