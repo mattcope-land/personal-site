@@ -1,0 +1,22 @@
+baseURL = 'https://mattcope.land/'
+locale = 'en-us'
+title = 'Matt Copeland'
+timezone = 'America/New_York'
+
+[params]
+  description = 'Writing and notes from Matt Copeland.'
+
+[outputs]
+  home = ['html', 'rss']
+  section = ['html', 'rss']
+
+[permalinks]
+  notes = '/notes/:year/:month/:day/:slug/'
+  essays = '/essays/:slug/'
+
+[taxonomies]
+  tag = ''
+  category = ''
+
+[minify]
+  minifyOutput = true
