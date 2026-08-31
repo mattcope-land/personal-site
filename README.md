@@ -23,23 +23,20 @@ content/          the site itself — Markdown
   essays/         longer posts (with title)
 layouts/          HTML templates, in-repo (no external theme)
 static/css/       one stylesheet
-archetypes/       front-matter templates for `hugo new`
+archetypes/       front-matter templates for new posts
 hugo.toml         Hugo config
 wrangler.jsonc    Cloudflare deploy config
 ```
 
-## Working on it
-
-```bash
-hugo server -D          # preview at localhost:1313
-hugo new content notes/2026-08-31-a-thought.md
-hugo new content essays/some-essay.md
-```
+Note URLs come from the filename (`content/notes/2026-08-29-a-thought.md` →
+`/notes/2026-08-29-a-thought/`), so any number of notes can share a date.
+Essays drop the date: `content/essays/some-essay.md` → `/essays/some-essay/`.
 
 ## Hosting
 
-Deploys automatically on push to `main`: Cloudflare builds with `hugo --minify`
-and publishes `public/` as a Worker serving static assets.
+Deploys on push to `main`: Cloudflare builds with `hugo --minify` and publishes
+`public/` as a Worker serving static assets. Posts dated in the future are
+excluded at build time, and nothing rebuilds on a timer.
 
 One thing not to lose: the build needs `HUGO_VERSION` set as a **build variable**
 in Cloudflare. Its build image ships an older Hugo, and Hugo renamed a config key
