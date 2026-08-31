@@ -12,7 +12,10 @@ enableRobotsTXT = true
   section = ['html', 'rss']
 
 [permalinks]
-  notes = '/notes/:year/:month/:day/:slug/'
+  # :contentbasename derives the URL from the filename, so every note is
+  # unique without needing front matter. :slug is empty for untitled notes,
+  # which collapsed every note on a given day onto one colliding URL.
+  notes = '/notes/:contentbasename/'
   essays = '/essays/:slug/'
 
 # No taxonomies. An empty table overrides Hugo's tags/categories defaults;
