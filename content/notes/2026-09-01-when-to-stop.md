@@ -1,4 +1,4 @@
 ---
-2026-09-01T15:38:11-04:00
+date: 2026-09-01T15:38:11-04:00
 ---
 The most critical AI prompting skill may be knowing when it’s time to step away from the AI.
