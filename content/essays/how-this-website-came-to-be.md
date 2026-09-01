@@ -1,6 +1,6 @@
 ---
 title: How this website came to be
-date: 2026-08-31T22:40
+date: 2026-08-31T22:40:00-04:00
 summary: Seeking a more future-proof format
 ---
 
