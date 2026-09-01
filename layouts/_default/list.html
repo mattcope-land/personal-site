@@ -4,7 +4,15 @@
   {{ with .Title }}<h1>{{ . }}</h1>{{ end }}
   {{ range .Pages }}
   <article class="stream-item">
-    <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "January 2, 2006" }}</time>
+    {{/* Titled posts link from their heading. Untitled notes have no heading,
+         so the date carries the link to the note's own page. */}}
+    <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+      {{- if .Title -}}
+        {{ .Date.Format "January 2, 2006" }}
+      {{- else -}}
+        <a href="{{ .RelPermalink }}">{{ .Date.Format "January 2, 2006" }}</a>
+      {{- end -}}
+    </time>
     {{ if .Title }}
     <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
     {{ with .Params.summary }}
@@ -15,7 +23,7 @@
     {{ end }}
     {{ end }}
     {{ else }}
-    <div class="note-body">{{ .Content | plainify | truncate 200 }}</div>
+    <div class="note-body">{{ .Content }}</div>
     {{ end }}
   </article>
   {{ end }}

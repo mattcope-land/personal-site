@@ -111,6 +111,18 @@ h2 a:hover {
   margin-bottom: 0.25rem;
 }
 
+/* On an untitled note the date is the permalink. Keep it muted like a plain
+   date until hover, the same way a titled post's heading link behaves. */
+.stream-item time a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.stream-item time a:hover {
+  color: var(--link);
+  text-decoration: underline;
+}
+
 .summary {
   color: var(--muted);
   margin: 0.25rem 0 0;
@@ -118,6 +130,17 @@ h2 a:hover {
 
 .note-body {
   margin-top: 0.25rem;
+}
+
+/* .note-body holds a note's rendered Markdown, so its first and last
+   paragraphs carry browser-default margins that would otherwise collapse
+   through and open a gap between the date and the note. */
+.note-body > :first-child {
+  margin-top: 0;
+}
+
+.note-body > :last-child {
+  margin-bottom: 0;
 }
 
 img {
