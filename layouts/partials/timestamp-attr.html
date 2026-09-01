@@ -1,0 +1,10 @@
+{{- /* The machine-readable half of a <time> element, kept in step with the
+       visible half rendered by timestamp.html -- same midnight test, so the
+       two must change together. A date with no time emits a date-only value
+       rather than asserting T00:00:00, which would claim a precision the
+       front matter never gave. Both forms are valid HTML datetime values. */ -}}
+{{- if or .Date.Hour .Date.Minute -}}
+  {{- .Date.Format "2006-01-02T15:04:05Z07:00" -}}
+{{- else -}}
+  {{- .Date.Format "2006-01-02" -}}
+{{- end -}}

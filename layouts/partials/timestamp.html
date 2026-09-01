@@ -1,0 +1,10 @@
+{{- /* A page's date, with the time appended only when one was actually given.
+
+       A date carrying no time -- `date: 2026-08-31` in front matter, or a date
+       derived from a note's YYYY-MM-DD filename prefix -- parses as midnight,
+       so midnight is what we read as "no time given". The tradeoff: a post
+       genuinely published at 00:00 shows no time. Set 00:01 if that matters.
+
+       Seconds are deliberately ignored. */ -}}
+{{- .Date.Format "January 2, 2006" -}}
+{{- if or .Date.Hour .Date.Minute }} at {{ .Date.Format "3:04 PM" }}{{ end -}}

@@ -10,11 +10,11 @@
   <article class="stream-item">
     {{/* Titled posts link from their heading. Untitled notes have no heading,
          so the date carries the link to the note's own page. */}}
-    <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+    <time datetime="{{ partial "timestamp-attr.html" . }}">
       {{- if .Title -}}
-        {{ .Date.Format "January 2, 2006" }}
+        {{ partial "timestamp.html" . }}
       {{- else -}}
-        <a href="{{ .RelPermalink }}">{{ .Date.Format "January 2, 2006" }}</a>
+        <a href="{{ .RelPermalink }}">{{ partial "timestamp.html" . }}</a>
       {{- end -}}
     </time>
     {{ if .Title }}

@@ -20,8 +20,11 @@
     <atom:link href="{{ .Permalink }}index.xml" rel="self" type="application/rss+xml" />
     {{- range $pages }}
     <item>
-      {{- /* Notes are untitled by design; fall back to the date. */}}
-      <title>{{ with .Title }}{{ . }}{{ else }}{{ .Date.Format "January 2, 2006" }}{{ end }}</title>
+      {{- /* Notes are untitled by design; fall back to the timestamp, which
+             carries the time when one was given -- the same string the site
+             shows -- so several notes on one day stay distinguishable in a
+             reader. In the else branch of `with`, dot is still the page. */}}
+      <title>{{ with .Title }}{{ . }}{{ else }}{{ partial "timestamp.html" . }}{{ end }}</title>
       <link>{{ .Permalink }}</link>
       <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
       <guid>{{ .Permalink }}</guid>

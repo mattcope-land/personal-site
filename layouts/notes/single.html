@@ -1,7 +1,7 @@
 {{ define "title" }}{{ with .Title }}{{ . }} &middot; {{ end }}{{ .Site.Title }}{{ end }}
 {{ define "main" }}
 <article class="single-note">
-  <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "January 2, 2006" }}</time>
+  <time datetime="{{ partial "timestamp-attr.html" . }}">{{ partial "timestamp.html" . }}</time>
   {{ .Content }}
 </article>
 {{ end }}
