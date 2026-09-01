@@ -1,7 +1,11 @@
 {{ define "title" }}{{ with .Title }}{{ . }} &middot; {{ end }}{{ .Site.Title }}{{ end }}
 {{ define "main" }}
+{{ with .Title }}<h1>{{ . }}</h1>{{ end }}
+{{/* The section's own body copy, from its _index.md. Guarded by `with` so a
+     section with no body doesn't emit an empty bordered block. */}}
+{{ with .Content }}<section class="intro">{{ . }}</section>{{ end }}
+
 <section class="stream">
-  {{ with .Title }}<h1>{{ . }}</h1>{{ end }}
   {{ range .Pages }}
   <article class="stream-item">
     {{/* Titled posts link from their heading. Untitled notes have no heading,

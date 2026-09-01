@@ -1,8 +1,9 @@
 {{ define "title" }}{{ .Site.Title }}{{ end }}
 {{ define "main" }}
-<section class="intro">
-  {{ .Content }}
-</section>
+{{ with .Title }}<h1>{{ . }}</h1>{{ end }}
+{{/* The homepage's own copy, from content/_index.md. Same shape as the section
+     list pages, so page copy always lives in _index.md rather than a template. */}}
+{{ with .Content }}<section class="intro">{{ . }}</section>{{ end }}
 
 <section class="stream">
   {{ $pages := where .Site.RegularPages "Type" "in" (slice "notes" "essays") }}
