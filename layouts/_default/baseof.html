@@ -10,6 +10,8 @@
        (*.workers.dev) never compete with the real domain in search results. */}}
   {{ if ne .Kind "404" }}<link rel="canonical" href="{{ .Permalink }}">{{ end }}
   <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ "/index.xml" | relURL }}">
+  <link rel="icon" href="{{ "/favicon.svg" | relURL }}" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="{{ "/apple-touch-icon.png" | relURL }}">
   <link rel="stylesheet" href="{{ "/css/site.css" | relURL }}">
 </head>
 <body>
