@@ -1,5 +1,5 @@
 ---
-2026-09-04T12:32:12-04:00
+date: 2026-09-04T12:32:12-04:00
 ---
 On a project I’m working on I reached a point where it appeared I needed to do a bunch of dashboard work to unblock Claude. I didn’t want to do that. 
 
