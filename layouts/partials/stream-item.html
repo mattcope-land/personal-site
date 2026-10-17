@@ -1,0 +1,32 @@
+{{- /* One post in a stream: the homepage and every section list render the same
+       card. The type class lets essays and notes look slightly different.
+
+       Titled posts link from their heading and get a "Read more" link in the
+       footer. Untitled notes have no heading, so the date carries the link to
+       the note's own page. */ -}}
+<article class="stream-item stream-item--{{ .Type }}">
+  {{ if .Title }}
+  <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+  {{ with .Params.summary }}
+  <p class="summary">{{ . }}</p>
+  {{ else }}
+  {{ with .Summary }}
+  <p class="summary">{{ . }}</p>
+  {{ end }}
+  {{ end }}
+  {{ else }}
+  <div class="note-body">{{ .Content }}</div>
+  {{ end }}
+  <footer class="stream-meta">
+    <time datetime="{{ partial "timestamp-attr.html" . }}">
+      {{- if .Title -}}
+        {{ partial "timestamp.html" . }}
+      {{- else -}}
+        <a href="{{ .RelPermalink }}">{{ partial "timestamp.html" . }}</a>
+      {{- end -}}
+    </time>
+    {{ with .Title }}
+    <a class="read-more" href="{{ $.RelPermalink }}" aria-label="Read more: {{ . }}">Read more <span aria-hidden="true">&rarr;</span></a>
+    {{ end }}
+  </footer>
+</article>

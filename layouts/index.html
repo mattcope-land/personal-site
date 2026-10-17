@@ -8,29 +8,7 @@
 <section class="stream">
   {{ $pages := where .Site.RegularPages "Type" "in" (slice "notes" "essays") }}
   {{ range $pages.ByDate.Reverse }}
-  <article class="stream-item">
-    {{/* Titled posts link from their heading. Untitled notes have no heading,
-         so the date carries the link to the note's own page. */}}
-    <time datetime="{{ partial "timestamp-attr.html" . }}">
-      {{- if .Title -}}
-        {{ partial "timestamp.html" . }}
-      {{- else -}}
-        <a href="{{ .RelPermalink }}">{{ partial "timestamp.html" . }}</a>
-      {{- end -}}
-    </time>
-    {{ if .Title }}
-    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-    {{ with .Params.summary }}
-    <p class="summary">{{ . }}</p>
-    {{ else }}
-    {{ with .Summary }}
-    <p class="summary">{{ . }}</p>
-    {{ end }}
-    {{ end }}
-    {{ else }}
-    <div class="note-body">{{ .Content }}</div>
-    {{ end }}
-  </article>
+  {{ partial "stream-item.html" . }}
   {{ end }}
 </section>
 {{ end }}
