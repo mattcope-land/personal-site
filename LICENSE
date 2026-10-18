@@ -4,6 +4,8 @@ SITE CODE — MIT License
 -----------------------
 Applies to the templates, stylesheet, configuration, and archetypes in this
 repository (layouts/, static/, archetypes/, hugo.toml, wrangler.jsonc).
+Bundled third-party files keep their own licenses: the JetBrains Mono fonts in
+static/fonts/jetbrains-mono/ are under the SIL Open Font License (OFL.txt there).
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

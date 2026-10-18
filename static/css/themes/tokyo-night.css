@@ -1,0 +1,166 @@
+/* Tokyo Night: a terminal-flavored cyberpunk look after the Tokyo Night editor
+   palette (github.com/folke/tokyonight.nvim). JetBrains Mono throughout,
+   neon cyan links that turn magenta on hover. The light side follows the
+   palette's "Day" variant, darkened where needed to keep text readable.
+
+   JetBrains Mono is self-hosted from static/fonts/ (SIL OFL, see OFL.txt). */
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../../fonts/jetbrains-mono/JetBrainsMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../../fonts/jetbrains-mono/JetBrainsMono-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../../fonts/jetbrains-mono/JetBrainsMono-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../../fonts/jetbrains-mono/JetBrainsMono-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Light ("Day") */
+:root {
+  --text: #343b58;
+  --bg: #e1e2e7;
+  --link: #00658a;
+  --link-hover: #7847bd;
+  --muted: #56618f;
+  --border: #c4c8da;
+  --card-bg: #f0f0f4;
+  --essay-accent: #9854f1;
+  --code-bg: rgba(46, 125, 233, 0.08);
+
+  --code-text: #485e30;
+  --prompt: #9854f1;
+  --glow: rgba(152, 84, 241, 0.18);
+  --haze: rgba(152, 84, 241, 0.07);
+  --selection: rgba(152, 84, 241, 0.22);
+
+  --font-body: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-mono: var(--font-body);
+  --font-size: 16px;
+  --font-size-small: 15px;
+  --line-height: 1.7;
+  --radius: 4px;
+}
+
+/* Dark ("Night") */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #c0caf5;
+    --bg: #1a1b26;
+    --link: #7dcfff;
+    --link-hover: #bb9af7;
+    --muted: #828bb8;
+    --border: #292e42;
+    --card-bg: #1f2335;
+    --essay-accent: #bb9af7;
+    --code-bg: rgba(122, 162, 247, 0.08);
+
+    --code-text: #9ece6a;
+    --prompt: #bb9af7;
+    --glow: rgba(125, 207, 255, 0.22);
+    --haze: rgba(187, 154, 247, 0.09);
+    --selection: rgba(187, 154, 247, 0.3);
+  }
+}
+
+/* A faint neon haze bleeding down from the top of the page. */
+body {
+  background-image: radial-gradient(ellipse 80% 420px at 50% 0, var(--haze), transparent);
+  background-repeat: no-repeat;
+}
+
+::selection {
+  background: var(--selection);
+}
+
+/* The site name reads like a shell prompt, with a cursor that blinks a few
+   times on load and then holds steady. The "/ ''" alt text keeps the
+   decorations out of screen readers; the plain declaration before each is the
+   fallback for browsers without CSS content alt text. */
+.site-name::before {
+  content: "> ";
+  content: "> " / "";
+  color: var(--prompt);
+}
+
+.site-name::after {
+  content: "_";
+  content: "_" / "";
+  color: var(--link);
+  animation: cursor-blink 1.1s steps(1) 4;
+}
+
+@keyframes cursor-blink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-name::after { animation: none; }
+}
+
+/* Nav entries as paths: /home /essays /notes */
+nav a {
+  text-transform: lowercase;
+}
+
+nav a::before {
+  content: "/";
+  content: "/" / "";
+  color: var(--muted);
+}
+
+h1, h2 {
+  letter-spacing: -0.02em;
+}
+
+/* a:hover outranks nav a and body > footer a in site.css, so every link
+   turns magenta. */
+a:hover {
+  color: var(--link-hover);
+  text-shadow: 0 0 12px var(--glow);
+}
+
+.stream-item {
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.stream-item:hover {
+  border-color: var(--link);
+  box-shadow: 0 0 0 1px var(--glow), 0 0 24px var(--glow);
+}
+
+.stream-item--essays:hover {
+  border-left-color: var(--essay-accent);
+}
+
+blockquote {
+  border-left-color: var(--essay-accent);
+}
+
+:not(pre) > code {
+  color: var(--code-text);
+  background: var(--code-bg);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}

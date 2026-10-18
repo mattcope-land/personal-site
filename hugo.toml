@@ -6,6 +6,9 @@ enableRobotsTXT = true
 
 [params]
   description = 'Writing and notes from Matt Copeland.'
+  # Which stylesheet in static/css/themes/ dresses the site. Switching back to
+  # an older look is a matter of changing this one name.
+  theme = 'tokyo-night'
 
 [outputs]
   home = ['html', 'rss']

@@ -13,6 +13,9 @@
   <link rel="icon" href="{{ "/favicon.svg" | relURL }}" type="image/svg+xml">
   <link rel="apple-touch-icon" href="{{ "/apple-touch-icon.png" | relURL }}">
   <link rel="stylesheet" href="{{ "/css/site.css" | relURL }}">
+  {{/* The active theme, picked by `theme` under [params] in hugo.toml. */}}
+  {{ $theme := site.Params.theme | default "classic" }}
+  <link rel="stylesheet" href="{{ printf "/css/themes/%s.css" $theme | relURL }}">
 </head>
 <body>
   <header>
